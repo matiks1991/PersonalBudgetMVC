@@ -13,5 +13,19 @@ $.validator.addMethod('validPassword',
         }
         return true;
     },
-    'Must contain at least one letter and one number'
+    'Hasło musi zawierać minimum jedną literę oraz jedną cyfrę'
 );
+
+$(document).ready(function() {
+    $("#show_hide_password").click(function() {
+        $("#show_hide_password_icon").toggleClass('icon-eye-off');
+
+        var input =$("#inputPassword");
+
+        if(input.attr("type") === "password"){
+            input.attr('type', 'text');
+        }else{
+            input.attr('type', 'password');
+        }
+    });
+});

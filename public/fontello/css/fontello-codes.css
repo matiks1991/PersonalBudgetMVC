@@ -4,9 +4,13 @@
 .icon-dollar:before { content: '\e802'; } /* '' */
 .icon-user:before { content: '\e803'; } /* '' */
 .icon-lock:before { content: '\e804'; } /* '' */
+.icon-eye:before { content: '\e805'; } /* '' */
+.icon-eye-off:before { content: '\e806'; } /* '' */
+.icon-login:before { content: '\e807'; } /* '' */
 .icon-cancel:before { content: '\e809'; } /* '' */
 .icon-home:before { content: '\e80a'; } /* '' */
 .icon-ok:before { content: '\e80b'; } /* '' */
+.icon-pencil:before { content: '\e80c'; } /* '' */
 .icon-link-ext:before { content: '\f08e'; } /* '' */
 .icon-twitter:before { content: '\f099'; } /* '' */
 .icon-facebook:before { content: '\f09a'; } /* '' */
@@ -18,3 +22,5 @@
 .icon-bank:before { content: '\f19c'; } /* '' */
 .icon-sliders:before { content: '\f1de'; } /* '' */
 .icon-chart:before { content: '\f201'; } /* '' */
+.icon-user-plus:before { content: '\f234'; } /* '' */
+.icon-user-times:before { content: '\f235'; } /* '' */
