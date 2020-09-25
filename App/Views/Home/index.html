@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+    {% if current_user %}
+        Hello {{ current_user.name }}.
+    {% else %}
+    <main id="cover">
+
+        <div class="container">
+
+         <div class="row">
+
+           <section class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 col-xl-5 offset-xl-1 bg-light">
+              <h1 class="display-4 text-primary font-weight-bold mb-3">Mój Budżet</h1>
+              <h3 class="mb-5 mt-4">Zapraszamy!</h3>
+
+              <a class="btn btn-success col-10 btn-lg mt-4 mb-2" href="/signup/new"><i class="icon-user mr-3"></i>Zarejestruj</a>
+              <a class="btn btn-secondary col-10 btn-lg my-3" href="/login"><i class="icon-link-ext mr-3"></i>Zaloguj</a>
+
+           </section>
+
+           <section class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 col-xl-5 bg-description">
+
+               <h4 class="mb-4">Napięty, nerwowy, Mój Budżet?</h4>
+               <p>Mój Budżet to program dla wszystkich zainteresowanych równoważeniem budżetu i finansów rodziny. Jeżeli masz wrażenie, że Twoje pieniądze przeciekają Tobie przez palce, teraz możesz odzyskać kontrolę nad finansami.</p>
+
+               <p>Aby zmniejszyć i zorganizować wydatki musisz najpierw poznać wydatki w domowym budżecie. Program pozwala na pokazanie i zredukowanie ukrytych kosztów w domowych wydatkach. Ukryte koszty domowego budżetu to potencjalne oszczędności.</p>
+
+
+               <footer class="text-muted pt-lg-4">&copy; Copyright by Mateusz Broniszewski 2020</footer>
+
+           </section>
+
+         </div>
+
+     </div>
+   </main>
+    {% endif %}
+
+{% endblock %}
