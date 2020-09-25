@@ -23,6 +23,11 @@
                         required: true,
                         minlength: 6,
                         validPassword: true
+                    },
+                    name: {
+                      required: true,
+                      minlength: 3,
+                      validName: true
                     }
                 },
                 messages: {
@@ -35,6 +40,11 @@
                         validPassword: 'Hasło musi zawierać minimum jedną literę oraz jedną cyfrę!',
                         minlength: 'Proszę wprowadzic minimum 6 znaków!',
                         required: 'Wprowadź hasło!'
+                    },
+                    name: {
+                      required: 'Wprowadź imię!',
+                      minlength: 'Imię musi mieć minimum 3 litery!',
+                      validName: 'Wprowadź poprawne imię!'
                     }
                 }
             });
@@ -55,12 +65,14 @@
               <h1 class="display-4 text-primary font-weight-bold mb-3">Mój Budżet</h1>
               <h3 class="mb-4">Rejestracja</h3>
               {% if user.errors is not empty %}
-                  <p>Errors:</p>
+                <div class="text-danger">
+                  <p>Błędy:</p>
                   <ul>
                       {% for error in user.errors %}
                           <li>{{ error }}</li>
                       {% endfor %}
                   </ul>
+                </div>
               {% endif %}
 
               <form class="text-center mx-3" action="/signup/create" method="post" id="formSignup">

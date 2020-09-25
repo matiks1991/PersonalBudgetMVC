@@ -16,6 +16,17 @@ $.validator.addMethod('validPassword',
     'Hasło musi zawierać minimum jedną literę oraz jedną cyfrę'
 );
 
+$.validator.addMethod('validName',
+    function(value, element, param) {
+        if (value != ''){
+            if (value.match(/.*[A-Za-zżźćńółęąśŻŹŚŁ]+.*/i) == null){
+                return false;
+            }
+        }
+        return true;
+    }
+);
+
 $(document).ready(function() {
     $("#show_hide_password").click(function() {
         $("#show_hide_password_icon").toggleClass('icon-eye-off');
