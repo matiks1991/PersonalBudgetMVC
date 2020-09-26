@@ -286,39 +286,7 @@ button:hover{
     opacity: 1;
 }
 
-/*
-* Add this if you want to disable IE10's implementation
-* of the winking eye in favor of your own.
-* Alternatively, you could set the 'innerToggle' option to
-* false for that browser only.
-*/
- 
-   ::-ms-reveal {
-    display:none !important;
-   }
-
-/*
-* This toggle style shows a winking "eye-con" (nyuk, nyuk).
-* Open eye means "show," closed eye means "hide."
-*/
-   .hideShowPassword-toggle {
-    background-image:url(../img/wink.svg);
-    background-position:0 center;
-    background-repeat:no-repeat;
-    background-color: transparent !important;
-    cursor:pointer;
-    height:100%;
-    overflow:hidden;
-    overflow:hidden;
-    text-indent:-9999em;
-    width:44px;
-    margin: 0;
-    padding: 0;
-   }
-   .hideShowPassword-toggle-hide {
-    background-position:-44px center;
-   }
-
-   input[type=password]{
-       width: 100%;
-   }
+#show_hide_password{
+    cursor: pointer;
+    color: #428c42;
+}

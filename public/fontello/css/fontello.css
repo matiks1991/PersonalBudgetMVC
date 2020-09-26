@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'fontello';
-  src: url('../font/fontello.eot?27075574');
-  src: url('../font/fontello.eot?27075574#iefix') format('embedded-opentype'),
-       url('../font/fontello.woff2?27075574') format('woff2'),
-       url('../font/fontello.woff?27075574') format('woff'),
-       url('../font/fontello.ttf?27075574') format('truetype'),
-       url('../font/fontello.svg?27075574#fontello') format('svg');
+  src: url('../font/fontello.eot?57137442');
+  src: url('../font/fontello.eot?57137442#iefix') format('embedded-opentype'),
+       url('../font/fontello.woff2?57137442') format('woff2'),
+       url('../font/fontello.woff?57137442') format('woff'),
+       url('../font/fontello.ttf?57137442') format('truetype'),
+       url('../font/fontello.svg?57137442#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?27075574#fontello') format('svg');
+    src: url('../font/fontello.svg?57137442#fontello') format('svg');
   }
 }
 */
@@ -55,22 +55,28 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
-.icon-calendar:before { content: '\e800';} /* '' */
-.icon-mail:before { content: '\e801'; font-size: 1.1rem;} /* '' */
-.icon-dollar:before { content: '\e802'; font-size: 1.55rem} /* '' */
-.icon-user:before { content: '\e803'; font-size: 1.1rem;} /* '' */
-.icon-lock:before { content: '\e804'; font-size: 1.1rem;} /* '' */
-.icon-cancel:before { content: '\e809'; font-size: 1.1rem;} /* '' */
-.icon-home:before { content: '\e80a'; font-size: 1.1rem} /* '' */
-.icon-ok:before { content: '\e80b'; } /* '' */
-.icon-link-ext:before { content: '\f08e'; font-size: 1.1rem} /* '' */
-.icon-twitter:before { content: '\f099'; } /* '' */
-.icon-facebook:before { content: '\f09a'; } /* '' */
-.icon-money:before { content: '\f0d6'; } /* '' */
-.icon-comment:before { content: '\f0e5'; } /* '' */
-.icon-download-cloud:before { content: '\f0ed'; font-size: 1.1rem} /* '' */
-.icon-upload-cloud:before { content: '\f0ee'; font-size: 1.1rem} /* '' */
-.icon-youtube:before { content: '\f167'; } /* '' */
-.icon-bank:before { content: '\f19c'; } /* '' */
-.icon-sliders:before { content: '\f1de'; font-size: 1.1rem} /* '' */
-.icon-chart:before { content: '\f201'; font-size: 1.1rem} /* '' */
+.icon-calendar:before { content: '\e800'; } /* '' */
+.icon-mail:before { content: '\e801'; font-size: 1.1rem } /* '' */
+.icon-dollar:before { content: '\e802'; font-size: 1.55rem } /* '' */
+.icon-user:before { content: '\e803'; font-size: 1.1rem } /* '' */
+.icon-lock:before { content: '\e804'; font-size: 1.1rem } /* '' */
+.icon-eye:before { content: '\e805'; font-size: 1.1rem } /* '' */
+.icon-eye-off:before { content: '\e806'; font-size: 1.1rem } /* '' */
+.icon-login:before { content: '\e807'; font-size: 1.1rem } /* '' */
+.icon-cancel:before { content: '\e809'; font-size: 1.1rem } /* '' */
+.icon-home:before { content: '\e80a'; font-size: 1.1rem } /* '' */
+.icon-ok:before { content: '\e80b'; font-size: 1.1rem } /* '' */
+.icon-pencil:before { content: '\e80c'; font-size: 1.1rem } /* '' */
+.icon-link-ext:before { content: '\f08e'; font-size: 1.1rem } /* '' */
+.icon-twitter:before { content: '\f099'; font-size: 1.1rem } /* '' */
+.icon-facebook:before { content: '\f09a'; font-size: 1.1rem } /* '' */
+.icon-money:before { content: '\f0d6'; font-size: 1.1rem } /* '' */
+.icon-comment:before { content: '\f0e5'; font-size: 1.1rem } /* '' */
+.icon-download-cloud:before { content: '\f0ed'; font-size: 1.1rem } /* '' */
+.icon-upload-cloud:before { content: '\f0ee'; font-size: 1.1rem } /* '' */
+.icon-youtube:before { content: '\f167'; font-size: 1.1rem } /* '' */
+.icon-bank:before { content: '\f19c'; font-size: 1.1rem } /* '' */
+.icon-sliders:before { content: '\f1de'; font-size: 1.1rem } /* '' */
+.icon-chart:before { content: '\f201'; font-size: 1.1rem } /* '' */
+.icon-user-plus:before { content: '\f234'; font-size: 1.1rem } /* '' */
+.icon-user-times:before { content: '\f235'; font-size: 1.1rem } /* '' */
