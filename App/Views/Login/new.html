@@ -1,30 +1,64 @@
-{% extends 'base.html' %}
+{% extends 'base_sign.html' %}
 
 {% block title %}Log in{% endblock %}
 
 
 {% block body %}
 
-    <h1>Log in</h1>
+    <section class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 col-xl-5 offset-xl-1 bg-light">
+        <h1 class="display-4 text-primary font-weight-bold mb-3">Mój Budżet</h1>
+        <h3 class="mb-5">Logowanie</h3>
 
-    <form method="post" action="/login/create" id="formLogin">
+        <form class="mt-3 mb-1" method="post" action="/login/create" id="formLogin">
 
-        <div class="form-group">
-            <label for="inputEmail">Email address</label>
-            <input id="inputEmail" name="email" placeholder="email address" required type="email" autofocus value="{{ email }}" class="form-control"/>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword">Password</label>
-            <input type="password" id="inputPassword" name="password" placeholder="Password" required class="form-control"/>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" name="remember_me" {% if remember_me %} checked="checked" {% endif %}> Remember me
-            </label>
-        </div>
-        
-        <button type="submit" class="btn btn-default">Log in</button>
-        <a href="/password/forgot">Forgot password?</a>
-    </form>
+           <div class="row">
+             <div class="form-group form-inline col offset-1">
+
+                 <div class="input-group-prepend">
+                   <span class="input-group-text" id="basic-addon1"><i class="icon-mail"></i></span>
+                 </div>
+                 <label class="sr-only">Email</label>
+                 <input id="inputEmail" type="email" class="form-control col-9" placeholder="Wprowadź adres email" aria-label="Email" aria-describedby="basic-addon1" required name="email" value="{{ email }}">
+             </div>
+           </div>
+
+           <div class="row">
+             <div class="form-group form-inline col offset-1">
+
+                 <div class="input-group-prepend">
+                   <span class="input-group-text" id="basic-addon2"><i class="icon-lock"></i></span>
+                 </div>
+                 <label class="sr-only">Hasło</label>
+                 <input id="inputPassword" type="password" class="form-control col-9" placeholder="Wprowadź hasło" aria-label="Hasło" aria-describedby="basic-addon2" required name="password">
+             </div>
+           </div>
+
+            <div class="custom-control custom-checkbox">
+                    <input type="checkbox" id="inputRemember" class="custom-control-input" name="remember_me" {% if remember_me %} checked="checked" {% endif %}> 
+                    <label class="custom-control-label" for="inputRemember">Zapamiętaj mnie</label>
+            </div>
+            
+           <div class="row">
+             <button type="submit" class="btn btn-success btn-md col-10 offset-1 mt-3">Zaloguj</button>
+           </div>
+
+           <a href="/password/forgot" class="btn btn-secondary-outline btn-sm mt-1">Zapomniałeś/aś hasła? Kliknij tutaj!</a>
+
+        </form>
+
+        <a href="/signup/new" class="btn btn-secondary-outline btn-sm" role="button">Nie masz jeszcze konta? Zarejestruj się &rarr;</a>
+       </section>
+
+     <section class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 col-xl-5 bg-description">
+       
+         <h4 class="mb-4">Napięty, nerwowy, Mój Budżet?</h4>
+         <p>Mój Budżet to program dla wszystkich zainteresowanych równoważeniem budżetu i finansów rodziny. Jeżeli masz wrażenie, że Twoje pieniądze przeciekają Tobie przez palce, teraz możesz odzyskać kontrolę nad finansami.</p>
+         
+         <p>Żeby zmniejszyć i zorganizować wydatki musisz najpierw poznać wydatki w domowym budżecie. Program pozwala na pokazanie i zredukowanie ukrytych kosztów w domowych wydatkach. Ukryte koszty domowego budżetu to potencjalne oszczędności.</p>
+
+
+         <footer class="text-muted pt-lg-5">&copy; Copyright by Mateusz Broniszewski 2020</footer>
+
+     </section>
 
 {% endblock %}
