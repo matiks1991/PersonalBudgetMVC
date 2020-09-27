@@ -25,7 +25,7 @@ abstract class Controller{
             }
         } else {
             // echo "Method $method not found in controller ".get_class($this);
-            throw new \Exception("Method $method not found in controller ".get_class($this));
+            throw new \Exception("Metoda $method nie została znaleziona w kontrolerze! ".get_class($this));
         }
     }
 
@@ -49,7 +49,7 @@ abstract class Controller{
         if (! Auth::getUser()){
             // exit("access denied");
 
-            Flash::addMessage('Please login to access that page', Flash::INFO);
+            Flash::addMessage('Proszę się zalogować aby mieć dostęp do tej strony!', Flash::INFO);
 
             Auth::rememberRequestedPage();
 
