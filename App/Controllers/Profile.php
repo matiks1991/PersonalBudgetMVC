@@ -38,7 +38,7 @@ class Profile extends Authenticated
     public function updateAction()
     {
         if ($this->user->updateProfile($_POST)) {
-            Flash::addMessage('Changes saved');
+            Flash::addMessage('Zmiany zostaly zapisane!');
 
             $this->redirect('/profile/show');
         } else {
