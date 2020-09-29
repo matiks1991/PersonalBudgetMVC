@@ -49,10 +49,10 @@ class Router{
                 return true;
             }
         }
-echo $url;
-echo $route;
-echo '<br>';
-print_r($matches);
+    // echo $url;
+    // echo $route;
+    // echo '<br>';
+    // print_r($matches);
 
         return false;
     }
