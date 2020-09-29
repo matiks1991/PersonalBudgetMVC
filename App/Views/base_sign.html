@@ -17,7 +17,7 @@
 </head>
 <body>
     {% for message in flash_messages %}
-        <div class="alert alert-{{ message.type }} m-0 text-center">
+        <div class="alert alert-{{ message.type }} m-0 text-center fixed-bottom">
             {{ message.body }}
         </div>
     {% endfor %}

@@ -18,16 +18,16 @@
                     <a class="nav-link" href="/"><i class="icon-home"> Menu</i><span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="expense.php"><i class="icon-upload-cloud"> Dodaj wydatek</i></a>
+                    <a class="nav-link" href="/expense"><i class="icon-upload-cloud"> Dodaj wydatek</i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="income.php"><i class="icon-download-cloud"> Dodaj przychód</i></a>
+                    <a class="nav-link" href="/income"><i class="icon-download-cloud"> Dodaj przychód</i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="balance.php"><i class="icon-chart"> Przeglądaj bilans</i></a>
+                    <a class="nav-link" href="/balance"><i class="icon-chart"> Przeglądaj bilans</i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="settings.php"><i class="icon-sliders"> Ustawienia</i></a>
+                    <a class="nav-link" href="/settings"><i class="icon-sliders"> Ustawienia</i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout"><i class="icon-link-ext"> Wyloguj</i></a>
@@ -42,6 +42,25 @@
             </nav>
         
         </header>
+
+        <article>
+            <div class="bg"></div>
+        
+            <div class="card col-md-8 offset-md-2 col-lg-6 offset-lg-3 mt-2 p-2">
+              <img class="card-img-top" src="img/doors.jpg" alt="Drzwi">
+              <div class="card-body p-1">
+                <h6 class="card-title text-center font-weight-bold">Witaj <span>{{ current_user.name }}</span>! </h6>
+                <p class="card-text text-center">Wybierz opcję z górnego menu.</p>
+              </div>
+            </div>
+
+            <footer class="mt-0">
+              <blockquote class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 mt-0 bg-blockquote">
+                <p>Nawyk zarządzania pieniędzmi jest ważniejszy niż ilość posiadanych pieniędzy.</p>
+                <small>T. Harv Eker</small>
+              </blockquote>
+            </footer>
+          </article>
         
     {% else %}
         <main id="cover">

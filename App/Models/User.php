@@ -18,6 +18,7 @@ class User extends \Core\Model
             $this->$key = $value;
         };
     }
+
     //Save the user model with the current property values
     public function save()
     {
@@ -25,6 +26,7 @@ class User extends \Core\Model
 
         if(empty($this->errors)){
             $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
+            $name = ucfirst(strtolower($this->name));
 
             $token = new Token();
             $hashed_token = $token->getHash();
@@ -36,7 +38,7 @@ class User extends \Core\Model
             $db = static::getDB();
             $stmt = $db->prepare($sql);
 
-            $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
+            $stmt->bindValue(':name', $name, PDO::PARAM_STR);
             $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
             $stmt->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
             $stmt->bindValue(':activation_hash', $hashed_token, PDO::PARAM_STR);
