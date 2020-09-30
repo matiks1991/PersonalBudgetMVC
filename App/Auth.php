@@ -25,7 +25,7 @@ class Auth
         }
     }
 
-    //Logour the user
+    //Logout the user
     public static function logout()
     {
         // Unset all of the session variables.
