@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title%}Expense{% endblock %}
+
+{% block header %}
+    
+<header>
+    <nav class="navbar sticky navbar-expand-xl navbar-dark bg-dark fixed-top py-1">
+        <a class="navbar-brand" href="/"><i class="icon-dollar"> Mój budżet</i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/"><i class="icon-home"> Menu</i></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/expense"><i class="icon-upload-cloud"> Dodaj wydatek</i><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/income"><i class="icon-download-cloud"> Dodaj przychód</i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/balance"><i class="icon-chart"> Przeglądaj bilans</i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/settings"><i class="icon-sliders"> Ustawienia</i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout"><i class="icon-link-ext"> Wyloguj</i></a>
+            </li>
+            </ul>
+    
+            <div class="navbar-user ml-auto border my-0 p-2">
+            <span>{{ current_user.name }}</span>
+            </div>
+    
+        </div>
+    </nav>
+
+  </header>
+
+  {% endblock %}
+  {% block body %}
+
+  <article>
+    <div class="bg"></div>
+  
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-6 offset-md-3 mt-3 bg-form p-0">
+
+                <h2 class="text-center font-weight-bold">Dodaj wydatek</h2>
+
+                <hr>
+
+                <form class="text-center m-4 form-control-sm" action="saveexpense.php" method="post">
+                    
+                    <div class="row">
+
+                        <div class="form-group form-inline col offset-1 form-control-sm">
+
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="icon-money"></i></span>
+                            </div>
+                            <label class="sr-only">Kwota</label>
+                            <input type="number" class="form-control col-8" name="amount" min="0" step="0.01" placeholder="Wprowadź kwotę" aria-label="Kwota" aria-describedby="basic-addon1" required autofocus autocomplete="off">
+                            
+                            <span class="input-group-text col-1 px-0">PLN</span>
+                            
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group form-inline col offset-1 form-control-sm">
+
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon2"><i class="icon-calendar"></i></span>
+                            </div>
+                            <label class="sr-only">Data</label>
+                            <input type="date" id="date" class="form-control col-9" name="date" aria-label="Data" aria-describedby="basic-addon2" required value="{{ currentDate }}">
+
+                        </div>
+                    </div>
+
+                    <fieldset class="text-left offset-1 mb-3">
+
+                        <legend>Sposób płatności:</legend>
+
+                        <div class="custom-control custom-radio">
+                            <input class="custom-control-input" type="radio" name="paymentMethod" id="paymentMethod" value="cos" required>
+                            <label class="custom-control-label" for="paymentMethod">
+                                Coś
+                            </label>
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset class="text-left offset-1 mb-3">
+
+                        <legend>Kategoria:</legend>
+
+                        
+
+                    </fieldset>
+
+                    <div class="row">
+                        <div class="form-group col-10 offset-1">
+                            <label class="titleComment" for="comment">Komentarz (opcjonalnie):</label>
+                            <textarea class="form-control" id="comment" name="comment" rows="2" cols="100"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <button type="reset" class="btn btn-reset btn-md col-5 mt-4 offset-1">Reset</button>
+                        <button type="submit" class="btn btn-success btn-md col-5 mt-4">Dodaj</button>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <footer class="col-md-6 offset-md-3 bg-blockquote">
+                <blockquote>
+                    <p>Mało, często powtarzane, stanowi wiele. Strzeżcie się drobnych wydatków – dosyć jest dla wody małego otworu, by wielki zatopiła okręt.</p>
+                    <small>Benjamin Franklin</small>
+                </blockquote>
+            </footer>
+        </div>
+    </div>
+    
+  </article>
+    
+{% endblock %}
