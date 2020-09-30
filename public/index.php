@@ -27,6 +27,9 @@
 	$router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
 	$router->add('password/reset/{token:[\da-f]+}', ['controller' => 'Password', 'action' => 'reset']);
 	$router->add('signup/activate/{token:[\da-f]+}', ['controller' => 'Signup', 'action' => 'activate']);
+	$router->add('expense', ['controller' => 'Expense', 'action' => 'index']);
+	$router->add('income', ['controller' => 'Income', 'action' => 'index']);
+
 	$router->add('{controller}/{action}');
 
 	// Display the routing table
