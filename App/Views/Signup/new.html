@@ -13,7 +13,11 @@
              */
             $('#formSignup').validate({
                 rules: {
-                    name: 'required',
+                    name: {
+                      required: true,
+                      minlength: 3,
+                      validName: true
+                    },
                     email: {
                         required: true,
                         email: true,
@@ -23,11 +27,6 @@
                         required: true,
                         minlength: 6,
                         validPassword: true
-                    },
-                    name: {
-                      required: true,
-                      minlength: 3,
-                      validName: true
                     }
                 },
                 messages: {

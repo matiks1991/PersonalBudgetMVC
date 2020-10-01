@@ -3,7 +3,7 @@
 {% block title%}Expense{% endblock %}
 
 {% block header %}
-    
+
 <header>
     <nav class="navbar sticky navbar-expand-xl navbar-dark bg-dark fixed-top py-1">
         <a class="navbar-brand" href="/"><i class="icon-dollar"> Mój budżet</i></a>
@@ -31,11 +31,11 @@
                 <a class="nav-link" href="/logout"><i class="icon-link-ext"> Wyloguj</i></a>
             </li>
             </ul>
-    
+
             <div class="navbar-user ml-auto border my-0 p-2">
             <span>{{ current_user.name }}</span>
             </div>
-    
+
         </div>
     </nav>
 
@@ -46,7 +46,7 @@
 
   <article>
     <div class="bg"></div>
-  
+
     <div class="container">
 
         <div class="row">
@@ -58,7 +58,7 @@
                 <hr>
 
                 <form id="formExpense" class="text-center m-4 form-control-sm" action="saveexpense.php" method="post">
-                    
+
                     <div class="row">
 
                         <div class="form-group form-inline col offset-1 form-control-sm">
@@ -68,9 +68,9 @@
                             </div>
                             <label class="sr-only">Kwota</label>
                             <input type="number" class="form-control col-8" name="amount" min="0" step="0.01" placeholder="Wprowadź kwotę" aria-label="Kwota" aria-describedby="basic-addon1" required autofocus autocomplete="off">
-                            
+
                             <span class="input-group-text col-1 px-0">PLN</span>
-                            
+
                         </div>
                     </div>
 
@@ -146,13 +146,12 @@
             </footer>
         </div>
     </div>
-    
+
   </article>
-    
+
 {% endblock %}
 
 {% block footer %}
-  <script src="/js/expense.js"></script>
 
   <script>
       $(document).ready(function () {
@@ -163,14 +162,34 @@
                 rules: {
                     amount: {
                         required: true,
-                        digits: true
+                        number: true,
+                        maxlength: 8
                     },
+                    date: {
+                        required: true
+                    },
+                    paymentMethod: {
+                        required: true
+                    },
+                    expenseCategory: {
+                        required: true
+                    }
 
                 },
                 messages: {
                     amount: {
                         required: 'Kwota jest wymagana!',
-                        digits: 'Można wprowadzać tylko wartości liczbowe!'
+                        number: 'Można wprowadzać tylko wartości liczbowe!',
+                        maxlength: 'Maksymalna liczba znaków to 8!'
+                    },
+                    date: {
+                        required: 'Data jest wymagana!'
+                    },
+                    paymentMethod: {
+                        required: 'Należy wybrać sposób płatności!'
+                    },
+                    expenseCategory: {
+                        required: 'Należy wybrać kategorię!'
                     }
                 }
             });
