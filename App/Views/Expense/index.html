@@ -57,7 +57,7 @@
 
                 <hr>
 
-                <form class="text-center m-4 form-control-sm" action="saveexpense.php" method="post">
+                <form id="formExpense" class="text-center m-4 form-control-sm" action="saveexpense.php" method="post">
                     
                     <div class="row">
 
@@ -90,12 +90,16 @@
 
                         <legend>Sposób płatności:</legend>
 
-                        <div class="custom-control custom-radio">
-                            <input class="custom-control-input" type="radio" name="paymentMethod" id="paymentMethod" value="cos" required>
-                            <label class="custom-control-label" for="paymentMethod">
-                                Coś
-                            </label>
-                        </div>
+                        {% for paymentMethod in paymentMethods %}
+
+                            <div class="custom-control custom-radio">
+                                <input class="custom-control-input" type="radio" name="paymentMethod" id="paymentMethod{{ paymentMethod.id }}" value="{{ paymentMethod.id }}" required>
+                                <label class="custom-control-label" for="paymentMethod{{ paymentMethod.id }}">
+                                    {{ paymentMethod.name }}
+                                </label>
+                            </div>
+
+                        {% endfor %}
 
                     </fieldset>
 
@@ -103,7 +107,16 @@
 
                         <legend>Kategoria:</legend>
 
-                        
+                        {% for expenseCategory in expensesCategory %}
+
+                            <div class="custom-control custom-radio">
+                                <input class="custom-control-input" type="radio" name="expenseCategory" id="expenseCategory{{ expenseCategory.id }}" value="{{ expenseCategory.id }}" required>
+                                <label class="custom-control-label" for="expenseCategory{{ expenseCategory.id }}">
+                                    {{ expenseCategory.name }}
+                                </label>
+                            </div>
+
+                        {% endfor %}
 
                     </fieldset>
 
@@ -137,3 +150,30 @@
   </article>
     
 {% endblock %}
+
+{% block footer %}
+  <script src="/js/expense.js"></script>
+
+  <script>
+      $(document).ready(function () {
+          /**
+           * Validate the form
+           */
+            $('#formExpense').validate({
+                rules: {
+                    amount: {
+                        required: true,
+                        digits: true
+                    },
+
+                },
+                messages: {
+                    amount: {
+                        required: 'Kwota jest wymagana!',
+                        digits: 'Można wprowadzać tylko wartości liczbowe!'
+                    }
+                }
+            });
+      });
+  </script>
+  {% endblock %}

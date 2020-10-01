@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Expenses;
 use Core\View;
 use \App\Time;
 
@@ -23,6 +24,8 @@ class Expense extends Authenticated
      */
     public function indexAction($arguments = [])
     {
+        $arguments['paymentMethods'] = Expenses::getPaymentMethods();
+        $arguments['expensesCategory'] = Expenses::getExpensesCategory();
         $arguments['currentDate'] = Time::getCurrentDate();
         View::renderTemplate('Expense/index.html', $arguments);
     }
