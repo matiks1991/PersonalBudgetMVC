@@ -59,13 +59,13 @@ use PDO;
         if (static::validateExpense()) {
             $comment = htmlentities($_POST['comment']);
 
-            $sql = "INSERT INTO expenses ( id, user_id, expense_category, 	payment_method, amount, date, comment) VALUES ( 'NULL', :user_id, :category, :paymentMethod, :amount, :date, :comment)";
+            $sql = "INSERT INTO expenses ( id, user_id, expense_category, payment_method, amount, date, comment) VALUES ( 'NULL', :user_id, :category, :paymentMethod, :amount, :date, :comment)";
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
 
             $stmt->bindValue(':amount', $_POST['amount'], PDO::PARAM_INT);
-            $stmt->bindValue(':date', '2000-02-02', PDO::PARAM_STR);
+            $stmt->bindValue(':date', $_POST['date'], PDO::PARAM_STR);
             $stmt->bindValue(':paymentMethod', $_POST['paymentMethod'], PDO::PARAM_INT);
             $stmt->bindValue(':category', $_POST['expenseCategory'], PDO::PARAM_INT);
             $stmt->bindValue(':comment', $comment, PDO::PARAM_STR);
@@ -105,7 +105,7 @@ use PDO;
         {
             Flash::addMessage('Wprowadź prawidłowy format daty! [DD.MM.RRRR]', Flash::WARNING);
             $result = false;
-        } elseif(Time::checkDate($_POST['date'])) {
+        } elseif( !Time::checkDate($_POST['date']) ) {
             Flash::addMessage('Wprowadź rzeczywistą datę!', Flash::WARNING);
             $result = false;
         }
