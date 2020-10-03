@@ -57,7 +57,7 @@
 
                 <hr>
 
-                <form id="formExpense" class="text-center m-4 form-control-sm" action="saveexpense.php" method="post">
+                <form id="formExpense" class="text-center m-4 form-control-sm" action="/expense/new" method="post">
 
                     <div class="row">
 
@@ -67,7 +67,7 @@
                                 <span class="input-group-text" id="basic-addon1"><i class="icon-money"></i></span>
                             </div>
                             <label class="sr-only">Kwota</label>
-                            <input type="number" class="form-control col-8" name="amount" min="0" step="0.01" placeholder="Wprowadź kwotę" aria-label="Kwota" aria-describedby="basic-addon1" required autofocus autocomplete="off">
+                            <input type="number" class="form-control col-8" name="amount" min="0" step="0.01" placeholder="Wprowadź kwotę" aria-label="Kwota" aria-describedby="basic-addon1" required autofocus autocomplete="off" value="{{ amount }}">
 
                             <span class="input-group-text col-1 px-0">PLN</span>
 
@@ -81,7 +81,7 @@
                                 <span class="input-group-text" id="basic-addon2"><i class="icon-calendar"></i></span>
                             </div>
                             <label class="sr-only">Data</label>
-                            <input type="date" id="date" class="form-control col-9" name="date" aria-label="Data" aria-describedby="basic-addon2" required value="{{ currentDate }}">
+                            <input type="date" id="date" class="form-control col-9" name="date" aria-label="Data" aria-describedby="basic-addon2" required value="{{ date }}">
 
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                     <div class="row">
                         <div class="form-group col-10 offset-1">
                             <label class="titleComment" for="comment">Komentarz (opcjonalnie):</label>
-                            <textarea class="form-control" id="comment" name="comment" rows="2" cols="100"></textarea>
+                            <textarea class="form-control" id="comment" name="comment" rows="2" cols="100">{{ comment }}</textarea>
                         </div>
                     </div>
 
