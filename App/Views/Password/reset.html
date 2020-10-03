@@ -1,0 +1,71 @@
+{% extends 'base_sign.html' %}
+
+{% block title %}Resetowanie hasła{% endblock %}
+
+{% block footer %}
+    <script src="/js/app.js"></script>
+
+    <script>
+
+        $(document).ready(function() {
+            //Validate the form
+            $('#formPassword').validate({
+                rules: {
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        validPassword: true
+                    }
+                },
+                messages: {
+                    password: {
+                        validPassword: 'Hasło musi zawierać minimum jedną literę oraz jedną cyfrę!',
+                        minlength: 'Proszę wprowadzić minimum 6 znaków!',
+                        required: 'Wprowadź hasło!'
+                    }
+                }
+            });
+        });
+    </script>
+
+{% endblock %}
+
+{% block body %}
+
+    <section class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 bg-light">
+
+        <h1>Mój budżet</h1>
+
+        <h3>Ustaw nowe hasło</h3>
+
+        {% if user.errors is not empty %}
+            <p>Errors:</p>
+            <ul>
+                {% for error in user.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="post" id="formPassword" action="/password/reset-password">
+
+            <input type="hidden" name="token" value="{{ token }}">
+
+            <div class="form-group form-inline col">
+
+                <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3"><i class="icon-lock"></i></span>
+                </div>
+                <label class="sr-only">Hasło</label>
+                <input type="password" class="form-control col" id="inputPassword" name="password" placeholder="Wprowadź hasło" aria-label="Hasło" aria-describedby="basic-addon3" required>
+                <div class="input-group-prepend">
+                <span class="input-group-text" id="show_hide_password"><i class="icon-eye" id="show_hide_password_icon"></i></span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-md col mt-2">Ustaw nowe hasło</button>
+
+        </form>
+    </section>
+
+{% endblock %}

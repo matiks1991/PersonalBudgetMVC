@@ -1,0 +1,127 @@
+{% extends 'base_sign.html' %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block footer %}
+    <script src="/js/app.js"></script>
+
+    <script>
+        $(document).ready(function() {
+          
+            /**
+             * Validate the form
+             */
+            $('#formSignup').validate({
+                rules: {
+                    name: {
+                      required: true,
+                      minlength: 3,
+                      validName: true
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                        remote: '/account/validate-email'
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        validPassword: true
+                    }
+                },
+                messages: {
+                    email: {
+                        remote: 'Podany adres email już istnieje w bazie!',
+                        email: 'Proszę wprowadzić poprawny adres email!',
+                        required: 'Wprowadź adres email!'
+                    },
+                    password: {
+                        validPassword: 'Hasło musi zawierać minimum jedną literę oraz jedną cyfrę!',
+                        minlength: 'Proszę wprowadzić minimum 6 znaków!',
+                        required: 'Wprowadź hasło!'
+                    },
+                    name: {
+                      required: 'Wprowadź imię!',
+                      minlength: 'Imię musi mieć minimum 3 litery!',
+                      validName: 'Wprowadź poprawne imię!'
+                    }
+                }
+            });
+        });
+    </script>
+
+{% endblock %}
+
+{% block body %}
+
+            <section class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 col-xl-5 offset-xl-1 bg-light">
+              <h1 class="display-4 text-primary font-weight-bold mb-3">Mój Budżet</h1>
+              <h3 class="mb-4">Rejestracja</h3>
+              {% if user.errors is not empty %}
+                <div class="text-danger">
+                  <p>Błędy:</p>
+                  <ul>
+                      {% for error in user.errors %}
+                          <li>{{ error }}</li>
+                      {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+
+              <form class="text-center mx-3" action="/signup/create" method="post" id="formSignup">
+
+                  <div class="form-group form-inline col">
+
+                    <div class="input-group-prepend col-2">
+                      <span class="input-group-text" id="basic-addon1"><i class="icon-user"></i></span>
+                    </div>
+
+                    <label class="sr-only">User Name</label>
+                    <input type="text" class="form-control col-8" id="inputEmail" name="name" placeholder="Wprowadź swoje imię" aria-label="Imię" aria-describedby="basic-addon1" required value="{{ user.name }}" autofocus>
+                  </div>
+
+                  <div class="form-group form-inline col">
+
+                    <div class="input-group-prepend col-2">
+                      <span class="input-group-text" id="basic-addon2"><i class="icon-mail"></i></span>
+                    </div>
+                    <label class="sr-only">Email</label>
+                    <input type="email" class="form-control col-8" id="inputEmail" name="email" placeholder="Wprowadź adres email" aria-label="Email" aria-describedby="basic-addon2" required value="{{ user.email }}">
+                  </div>
+
+                  <div class="form-group form-inline col">
+
+                    <div class="input-group-prepend col-2">
+                      <span class="input-group-text" id="basic-addon3"><i class="icon-lock"></i></span>
+                    </div>
+                    <label class="sr-only">Hasło</label>
+                    <input type="password" class="form-control col-8" id="inputPassword" name="password" placeholder="Wprowadź hasło" aria-label="Hasło" aria-describedby="basic-addon3" required>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="show_hide_password"><i class="icon-eye" id="show_hide_password_icon"></i></span>
+                    </div>
+                  </div>
+
+                <div class="form-group offset-1 col-10">
+
+                  <button type="submit" class="btn btn-success btn-md col mt-2">Zarejestruj</button>
+                </div>
+
+              </form>
+
+              <a href="/login" class="btn btn-secondary-outline btn-sm mt-2" role="button">&larr; Strona logowania</a>
+            </section>
+
+            <section class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 col-xl-5 bg-description">
+
+              <h4 class="mb-4">Napięty, nerwowy, Mój Budżet?</h4>
+              <p>Mój Budżet to program dla wszystkich zainteresowanych równoważeniem budżetu i finansów rodziny. Jeżeli masz wrażenie, że Twoje pieniądze przeciekają Tobie przez palce, teraz możesz odzyskać kontrolę nad finansami.</p>
+
+              <p>Żeby zmniejszyć i zorganizacować wydatki musisz najpierw poznać wydatki w domowym budżecie. Program pozwala na pokazanie i zredukowanie ukrytych kosztów w domowych wydatkach. Ukryte koszty domowego budżetu to potencjalne oszczędności.</p>
+
+
+              <footer class="text-muted pt-lg-5">&copy; Copyright by Mateusz Broniszewski 2020</footer>
+
+            </section>
+
+
+{% endblock %}

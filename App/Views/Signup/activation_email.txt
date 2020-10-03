@@ -1,0 +1,5 @@
+Mój budżet - Aktywacja konta
+
+Dziękujemy za rejestrację. Proszę kliknąć tutaj aby aktywować konto:
+
+{{ url }}

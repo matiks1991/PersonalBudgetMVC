@@ -1,0 +1,27 @@
+{% extends "base_sign.html" %}
+
+{% block title%}Zapomniane hasło{% endblock %}
+
+{% block body %}
+
+<section class="col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 bg-light">
+
+    <h1>Resetowanie hasła</h1>
+
+    <form class="mt-4" action="/password/request-reset" method="post">
+        <div class="row">
+            <div class="form-group form-inline col offset-1">
+
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i class="icon-mail"></i></span>
+                </div>
+                <label class="sr-only">Email</label>
+                <input id="inputEmail" type="email" class="form-control col-9" placeholder="Wprowadź adres email" aria-label="Email" aria-describedby="basic-addon1" required name="email" value="{{ email }}">
+            </div>
+          </div>
+
+        <button type="submit" class="btn btn-success btn-md mt-2">Resetuj hasło</button>
+    </form>
+</section>
+
+{% endblock %}
