@@ -7,22 +7,21 @@ use App\Time;
 use PDO;
 
 /**
- * Expenses Model
+ * Incomes Model
  *
  * PHP 7.0
  */
 
- class Expenses extends \Core\Model
+ class Incomes extends \Core\Model
  {
-
     /**
-     * Get payment methods
+     * Get category incomes
      * @param Session user_id
      * @return array
      */
-    public static function getPaymentMethods()
+    public static function getIncomesCategory()
     {
-        $sql = 'SELECT id, name FROM payment_methods_assigned_to_users WHERE user_id='.$_SESSION['user_id'];
+        $sql = 'SELECT id, name FROM incomes_category_assigned_to_users WHERE user_id='.$_SESSION['user_id'];
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);
@@ -33,44 +32,26 @@ use PDO;
     }
 
     /**
-     * Get category expenses
-     * @param Session user_id
-     * @return array
-     */
-    public static function getExpensesCategory()
-    {
-        $sql = 'SELECT id, name FROM expenses_category_assigned_to_users WHERE user_id='.$_SESSION['user_id'];
-
-        $db = static::getDB();
-        $stmt = $db->prepare($sql);
-
-        $stmt->execute();
-
-        return $stmt->fetchAll();
-    }
-
-    /**
-     * Save a expense
+     * Save a income
      * @param form method post
      * @return boolean success = true
      */
-    public static function saveExpense()
+    public static function saveIncome()
     {
-        if (static::validateExpense()) {
+        if (static::validateIncome()) {
             $comment = htmlentities($_POST['comment']);
 
-            $sql = "INSERT INTO expenses ( id, user_id, expense_category, payment_method, amount, date, comment) VALUES ( 'NULL', :user_id, :category, :paymentMethod, :amount, :date, :comment)";
+            $sql = "INSERT INTO incomes ( id, user_id, income_category, amount, date, comment) VALUES ( 'NULL', :user_id, :category, :amount, :date, :comment)";
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
 
             $stmt->bindValue(':amount', $_POST['amount'], PDO::PARAM_INT);
             $stmt->bindValue(':date', $_POST['date'], PDO::PARAM_STR);
-            $stmt->bindValue(':paymentMethod', $_POST['paymentMethod'], PDO::PARAM_INT);
-            $stmt->bindValue(':category', $_POST['expenseCategory'], PDO::PARAM_INT);
+            $stmt->bindValue(':category', $_POST['incomeCategory'], PDO::PARAM_INT);
             $stmt->bindValue(':comment', $comment, PDO::PARAM_STR);
             $stmt->bindValue(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
-            
+
             return $stmt->execute();
         }
 
@@ -78,15 +59,15 @@ use PDO;
     }
 
     /**
-     * Validate a expense
+     * Validate a income
      * @param form method post
      * @return boolean success = true
      */
-    protected static function validateExpense()
+    protected static function validateIncome()
     {
         $result = true;
 
-        if ((!isset($_POST['amount'])) || (!isset($_POST['date'])) || (!isset($_POST['paymentMethod'])) || (!isset($_POST['expenseCategory']))) {
+        if ((!isset($_POST['amount'])) || (!isset($_POST['date'])) || (!isset($_POST['incomeCategory']))) {
             Flash::addMessage('Wypełnij wszystkie wymagane pola!', Flash::WARNING);
             $result = false;
         }
@@ -105,7 +86,7 @@ use PDO;
         {
             Flash::addMessage('Wprowadź prawidłowy format daty! [DD.MM.RRRR]', Flash::WARNING);
             $result = false;
-        } elseif( !Time::checkDate($_POST['date']) ) {
+        } elseif( !Time::checkDate($_POST['date'] )) {
             Flash::addMessage('Wprowadź rzeczywistą datę!', Flash::WARNING);
             $result = false;
         }
