@@ -13,13 +13,13 @@ $.validator.addMethod('validPassword',
         }
         return true;
     },
-    'Hasło musi zawierać minimum jedną literę oraz jedną cyfrę'
+    //'Hasło musi zawierać minimum jedną literę oraz jedną cyfrę'
 );
 
 $.validator.addMethod('validName',
     function(value, element, param) {
         if (value != ''){
-            if (value.match(/.*[A-Za-zżźćńółęąśŻŹŚŁ]+.*/i) == null){
+            if (value.match(/[a-zżźćńółęąś]+/i) == null){
                 return false;
             }
         }
