@@ -44,10 +44,8 @@
 
         <ul class="navbar-nav mr-0 ml-auto ml-xl-3 d-inline-block navbar-dark visible-lg">
             <li class="nav-item dropdown">
-                <button id="choosePeriod" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Wybierz okres
-                </button>
+                <button id="choosePeriodButton" class="nav-link dropdown-toggle p-2" id="navbarDropdown" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">Wybierz okres</button>
                 <div class="dropdown-menu navbar-dark" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/balance">Bierzący miesiąc</a>
                 <a class="dropdown-item" href="/poprzedni-miesiac">Poprzedni miesiąc</a>
@@ -293,7 +291,7 @@
                    <span aria-hidden="true">&times;</span>
                 </button>
              </div>
-             <form class="text-center form-control" action="customperiod.php">
+             <form class="text-center form-control" action="/niestandardowy-okres" method="post">
                 <div class="modal-body">
 
                    <div class="row">
@@ -303,8 +301,7 @@
                             <span class="input-group-text" id="basic-addon1"><i class="icon-calendar"></i></span>
                          </div>
                          <label for="date1" class="sr-only">Data</label>
-                         <input type="date" id="date1" class="form-control col-9" name="dateStart"
-                            aria-label="Data" aria-describedby="basic-addon1" required value='{{ oldestDate }}'>
+                         <input type="date" id="date1" class="form-control col-9" name="dateStart" aria-label="Data" aria-describedby="basic-addon1" required {% for date in oldestDate %} value={{ date.date }} {% endfor %}>
                       </div>
                    </div>
 
@@ -316,7 +313,7 @@
                          </div>
                          <label for="date2" class="sr-only">Data</label>
                          <input type="date" id="date2" class="form-control col-9" name="dateEnd"
-                            aria-label="Data" aria-describedby="basic-addon2" required value='{{ youngestDate }}'>
+                            aria-label="Data" aria-describedby="basic-addon2" required {% for date in yungestDate %} value={{ date.date }} {% endfor %}>
                       </div>
                    </div>
 
@@ -348,43 +345,46 @@
 
     function drawChart(){
   
-      var data = new google.visualization.arrayToDataTable('{{ jsonPieChart }}');
-      
-      var options = {
-        title:'Wydatki - graficznie',
-        titleTextStyle:{color:'#52361b', fontSize:20, bold:1},
-        legend: 'none',
-        width:'100%',
-        height:330,
-        backgroundColor:'lightgray',
-        sliceVisibilityThreshold:.005,
-        margin:'0px',
-        paddings:'0px',
-        pieHole:0.4,
-        borderradius:'20px'
-      };
+        // console.log( '{{ jsonPieChart }}');
+        // var data = new google.visualization.arrayToDataTable('{{ jsonPieChart }}');
+        var data = new google.visualization.DataTable();
+        data.addColumn('string','Kategoria');
+        data.addColumn('number', 'Suma');
+        data.addRows('{{ jsonPieChart }}');
 
-      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-      chart.draw(data, options);
+        var options = {
+            title:'Wydatki - graficznie',
+            titleTextStyle:{color:'#52361b', fontSize:20, bold:1},
+            legend: 'none',
+            width:'100%',
+            height:330,
+            backgroundColor:'lightgray',
+            sliceVisibilityThreshold:.005,
+            margin:'0px',
+            paddings:'0px',
+            pieHole:0.4,
+            borderradius:'20px'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
     }
 
     jQuery(function($)
-      {
+    {
           //reset scroll
           $.scrollTo(0);
           $('.scrollup').click(function() { $.scrollTo($('body'), 1000); })
-      }
-    );
+    });
     
     //show during scrolling
     $(window).scroll(function()
-      {
-       if($(this).scrollTop()>300)
-          $('.scrollup').fadeIn();
-       else
-          $('.scrollup').fadeOut();
-      }
-    );
+    {
+        if($(this).scrollTop()>300)
+            $('.scrollup').fadeIn();
+        else
+            $('.scrollup').fadeOut();
+    });
     
     $(window).resize(function(){
        drawChart();

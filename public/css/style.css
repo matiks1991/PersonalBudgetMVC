@@ -291,6 +291,6 @@ button:hover{
     color: #428c42;
 }
 
-#choosePeriod{
-    padding: 0.8rem;
+#choosePeriodButton{
+    padding: 0.8rem !important;
 }

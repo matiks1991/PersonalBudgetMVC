@@ -26,7 +26,10 @@ use PDO;
         $arguments['expenses'] = static::getExpenses($dateStart, $dateEnd);
         $arguments['incomesDetail'] = static::getIncomesDetail($dateStart, $dateEnd);
         $arguments['expensesDetail'] = static::getExpensesDetail($dateStart, $dateEnd);
+        $arguments['oldestDate'] = static::retreiveOldestDate();
+        $arguments['yungestDate'] = static::retreiveYungestDate();
         $arguments['jsonPieChart'] = static::generateChartData($arguments['expenses']);
+        $arguments['caption'] = 'Bilans od '.$dateStart.' do '.$dateEnd;
 
         return $arguments;
     }
@@ -179,12 +182,48 @@ use PDO;
      */
     private static function generateChartData($expenses)
     {
-        $pieData = array(array('Category', "Total"));
+        $pieData = array(array('Kategoria', "Suma"));
         foreach($expenses as $expense){
             $pieData[] = array($expense['category'], (double)$expense['total']);
         }
 
         return json_encode($pieData);
+    }
+
+    /**
+     * Retreive oldest date
+     * @param int: Session user_id
+     * @return array
+     */
+    private static function retreiveOldestDate()
+    {
+        $instructionRetrieveOldestDate = 'SELECT LEAST((SELECT MIN(date) FROM incomes WHERE user_id = '.$_SESSION['user_id'].'),(SELECT MIN(date) FROM expenses WHERE user_id = '.$_SESSION['user_id'].')) as date;';
+
+        $db = static::getDB();
+
+        $stmt = $db->prepare($instructionRetrieveOldestDate);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
+    /**
+     * Retreive yungest date
+     * @param int: Session user_id
+     * @return array
+     */
+    private static function retreiveYungestDate()
+    {
+        $instructionRetrieveYoungestDate = 'SELECT GREATEST((SELECT MAX(date) FROM incomes WHERE user_id = '.$_SESSION['user_id'].'),(SELECT MAX(date) FROM expenses WHERE user_id = '.$_SESSION['user_id'].')) as date;';
+
+        $db = static::getDB();
+
+        $stmt = $db->prepare($instructionRetrieveYoungestDate);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll();
     }
 
 }
