@@ -91,13 +91,13 @@ article{
     margin: 0;
     position: relative;
     z-index: 1;
-    min-height: 92%;
+    min-height: 94%;
 }
 
 article .bg {
     position: absolute;
     z-index: -1;
-    top: 50px;
+    top: 48px;
     background: url(../img/man_woman_dog_big.jpg) center center;
     filter: brightness(50%);
     width: 100%;
@@ -289,4 +289,8 @@ button:hover{
 #show_hide_password{
     cursor: pointer;
     color: #428c42;
+}
+
+#choosePeriod{
+    padding: 0.8rem;
 }
