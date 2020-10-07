@@ -344,13 +344,19 @@
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart(){
-  
-        // console.log( '{{ jsonPieChart }}');
-        // var data = new google.visualization.arrayToDataTable('{{ jsonPieChart }}');
-        var data = new google.visualization.DataTable();
-        data.addColumn('string','Kategoria');
-        data.addColumn('number', 'Suma');
-        data.addRows('{{ jsonPieChart }}');
+
+        // {% for record in jsonPieChart %}
+        //     console.log('{{ record.category }}');
+        //     console.log('{{ record.total }}');
+        // {% endfor %}
+
+        console.log( '{{ jsonPieChart }}');
+        var data = new google.visualization.arrayToDataTable([ 
+            [{label: 'Kategoria', type: 'string'}, {label: 'Ilość', type: 'number'}],
+            {% for record in jsonPieChart %}
+                ['{{ record.category }}','{{ record.total }}']
+            {% endfor %}
+        ]);
 
         var options = {
             title:'Wydatki - graficznie',

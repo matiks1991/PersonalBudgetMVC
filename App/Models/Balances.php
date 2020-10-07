@@ -182,7 +182,8 @@ use PDO;
      */
     private static function generateChartData($expenses)
     {
-        $pieData = array(array('Kategoria', "Suma"));
+        // $pieData = array('category', "total");
+        $pieData = array();
         foreach($expenses as $expense){
             $pieData[] = array($expense['category'], (double)$expense['total']);
         }
