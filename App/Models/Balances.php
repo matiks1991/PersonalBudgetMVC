@@ -30,6 +30,8 @@ use PDO;
         $arguments['yungestDate'] = static::retreiveYungestDate();
         $arguments['jsonPieChart'] = static::generateChartData($arguments['expenses']);
         $arguments['caption'] = 'Bilans od '.$dateStart.' do '.$dateEnd;
+        if(empty($arguments['incomes']) && empty($arguments['expenses']))
+            Flash::addMessage('Brak wyników z wybranego okresu!', Flash::WARNING);
 
         return $arguments;
     }
