@@ -28,7 +28,8 @@ use PDO;
         $arguments['expensesDetail'] = static::getExpensesDetail($dateStart, $dateEnd);
         $arguments['oldestDate'] = static::retreiveOldestDate();
         $arguments['yungestDate'] = static::retreiveYungestDate();
-        $arguments['jsonPieChart'] = static::generateChartData($arguments['expenses']);
+        // $arguments['jsonPieChart'] = static::generateChartData($arguments['expenses']);
+        $arguments['jsonPieChart'] = static::showBalance($dateStart, $dateEnd);
         $arguments['caption'] = 'Bilans od '.$dateStart.' do '.$dateEnd;
         if(empty($arguments['incomes']) && empty($arguments['expenses']))
             Flash::addMessage('Brak wyników z wybranego okresu!', Flash::WARNING);
@@ -184,13 +185,46 @@ use PDO;
      */
     private static function generateChartData($expenses)
     {
-        // $pieData = array('category', "total");
+        // $pieData = array(array('category', 'total'));
         $pieData = array();
-        foreach($expenses as $expense){
-            $pieData[] = array($expense['category'], (double)$expense['total']);
+        // foreach($expenses as $expense){
+        //     $pieData[] = array($expense['category'], (double)$expense['total']);
+        // }
+
+        $expensesArray = json_decode(json_encode($expenses), True);
+
+        foreach ($expensesArray as $expenseChart) {
+            array_push($pieData, array("label"=>$expenseChart['category'], "y"=>$expenseChart['total']));
         }
 
-        return json_encode($pieData);
+        json_encode($pieData, JSON_NUMERIC_CHECK);
+
+        return $expensesArray;
+        // return json_encode($pieData);
+    }
+
+    public static function showBalance($dateStart, $dateEnd) {
+    
+            $expensePieChart = "SELECT ec.name category, SUM(e.amount) total FROM expenses AS e, expenses_category_assigned_to_users AS ec 
+            WHERE e.user_id=".$_SESSION['user_id']." AND ec.user_id=".$_SESSION['user_id']." AND ec.id=e.expense_category AND e.date 
+            BETWEEN '$dateStart' AND '$dateEnd' GROUP BY expense_category";
+    
+            $db = static::getDB();
+            $stmt = $db->prepare($expensePieChart);
+            $stmt->execute();
+    
+            $expensePie = array();
+            $expenseResult = $stmt->fetchAll(\PDO::FETCH_OBJ);
+    
+            $expensesArray = json_decode(json_encode($expenseResult), True);
+    
+            foreach ($expensesArray as $expenseChart) {
+                array_push($expensePie, array("label"=>$expenseChart['category'], "y"=>$expenseChart['total']));
+            }
+    
+            return json_encode($expensePie, JSON_NUMERIC_CHECK);
+            
+            return $expensesArray;
     }
 
     /**
@@ -227,6 +261,32 @@ use PDO;
         $stmt->execute();
 
         return $stmt->fetchAll();
+    }
+
+    /**
+     * Validate a date of balance
+     * @param form method post
+     * @return boolean success = true
+     */
+    public static function validateDatesOfBalance()
+    {
+        $result = true;
+
+        if ((!isset($_POST['dateStart'])) || (!isset($_POST['dateEnd']))) {
+            Flash::addMessage('Wypełnij wszystkie wymagane pola!', Flash::WARNING);
+            $result = false;
+        } elseif ($_POST['dateStart'] > $_POST['dateEnd']){
+            Flash::addMessage('Data początkowa nie może być starsza od daty końcowej!', Flash::WARNING);
+            $result = false;
+        } elseif (!preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $_POST['dateStart']) || !preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $_POST['dateEnd'])) {
+            Flash::addMessage('Wprowadź prawidłowy format daty! [DD.MM.RRRR]', Flash::WARNING);
+            $result = false;
+        } elseif( !Time::checkDate($_POST['dateStart']) || !Time::checkDate($_POST['dateEnd'])) {
+            Flash::addMessage('Wprowadź rzeczywistą datę!', Flash::WARNING);
+            $result = false;
+        }
+
+        return $result;
     }
 
 }

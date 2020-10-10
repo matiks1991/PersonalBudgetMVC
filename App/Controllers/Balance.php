@@ -56,9 +56,12 @@ class Balance extends Authenticated
      */
     public function customPeriodAction()
     {
-        $dateStart = $_POST['dateStart'];
-        $dateEnd = $_POST['dateEnd'];
-        $arguments = Balances::getCustomPeriod($dateStart, $dateEnd);
+        $arguments = [];
+        if(Balances::validateDatesOfBalance()){
+            $dateStart = $_POST['dateStart'];
+            $dateEnd = $_POST['dateEnd'];
+            $arguments = Balances::getCustomPeriod($dateStart, $dateEnd);
+        }
         View::renderTemplate('Balance/index.html', $arguments);
     }
 

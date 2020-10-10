@@ -47,7 +47,7 @@
                 <button id="choosePeriodButton" class="nav-link dropdown-toggle p-2" id="navbarDropdown" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">Wybierz okres</button>
                 <div class="dropdown-menu navbar-dark" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/balance">Bierzący miesiąc</a>
+                <a class="dropdown-item" href="/balance">Bieżący miesiąc</a>
                 <a class="dropdown-item" href="/poprzedni-miesiac">Poprzedni miesiąc</a>
                 <a class="dropdown-item" href="/biezacy-rok">Bieżący rok</a>
                 <div class="dropdown-divider"></div>
@@ -336,7 +336,7 @@
 <script src="/js/jquery.scrollTo.min.js"></script>
 <script src="/js/loader.js"></script>
 
-<script src="/js/personalbudget.js"></script>
+<script src="/js/personalbudget.js"></script> 
 
 <script>
 
@@ -345,17 +345,20 @@
 
     function drawChart(){
 
-        // {% for record in jsonPieChart %}
-        //     console.log('{{ record.category }}');
-        //     console.log('{{ record.total }}');
-        // {% endfor %}
+        console.log('{{ jsonPieChart }}');
+        
+        // var data = new google.visualization.arrayToDataTable([
+        //     [{label: 'Category', type: 'string'}, {label: 'Value', type: 'number'}],
+        //     {% for record in jsonPieChart %}
+        //         ['{{ record.category }}', {{ record['total'] }}]
+        //     {% endfor %}
+        // ]);
 
-        console.log( '{{ jsonPieChart }}');
-        var data = new google.visualization.arrayToDataTable([ 
-            [{label: 'Kategoria', type: 'string'}, {label: 'Ilość', type: 'number'}],
-            {% for record in jsonPieChart %}
-                ['{{ record.category }}','{{ record.total }}']
-            {% endfor %}
+        var data = google.visualization.arrayToDataTable([
+        	['Name', 'Value'],
+          {% for pieCh in jsonPieChart %}
+          		['{{ pieCh.category }}', {{ pieCh['total'] }}],
+          	{% endfor %}
         ]);
 
         var options = {
