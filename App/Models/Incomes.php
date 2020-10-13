@@ -46,7 +46,7 @@ use PDO;
             $db = static::getDB();
             $stmt = $db->prepare($sql);
 
-            $stmt->bindValue(':amount', $_POST['amount'], PDO::PARAM_INT);
+            $stmt->bindValue(':amount', $_POST['amount'], PDO::PARAM_STR);
             $stmt->bindValue(':date', $_POST['date'], PDO::PARAM_STR);
             $stmt->bindValue(':category', $_POST['incomeCategory'], PDO::PARAM_INT);
             $stmt->bindValue(':comment', $comment, PDO::PARAM_STR);
