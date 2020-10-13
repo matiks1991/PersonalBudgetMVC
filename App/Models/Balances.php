@@ -28,8 +28,7 @@ use PDO;
         $arguments['expensesDetail'] = static::getExpensesDetail($dateStart, $dateEnd);
         $arguments['oldestDate'] = static::retreiveOldestDate();
         $arguments['yungestDate'] = static::retreiveYungestDate();
-        // $arguments['jsonPieChart'] = static::generateChartData($arguments['expenses']);
-        $arguments['jsonPieChart'] = static::showBalance($dateStart, $dateEnd);
+        $arguments['jsonPieChart'] = static::generateChartData($dateStart, $dateEnd);
         $arguments['caption'] = 'Bilans od '.$dateStart.' do '.$dateEnd;
         if(empty($arguments['incomes']) && empty($arguments['expenses']))
             Flash::addMessage('Brak wyników z wybranego okresu!', Flash::WARNING);
@@ -180,30 +179,10 @@ use PDO;
 
     /**
      * Generate piechart data
-     * @param array: $expenses
-     * @return json
+     * @param string: $dateStart, $dateEnd
+     * @return array
      */
-    private static function generateChartData($expenses)
-    {
-        // $pieData = array(array('category', 'total'));
-        $pieData = array();
-        // foreach($expenses as $expense){
-        //     $pieData[] = array($expense['category'], (double)$expense['total']);
-        // }
-
-        $expensesArray = json_decode(json_encode($expenses), True);
-
-        foreach ($expensesArray as $expenseChart) {
-            array_push($pieData, array("label"=>$expenseChart['category'], "y"=>$expenseChart['total']));
-        }
-
-        json_encode($pieData, JSON_NUMERIC_CHECK);
-
-        return $expensesArray;
-        // return json_encode($pieData);
-    }
-
-    public static function showBalance($dateStart, $dateEnd) {
+    public static function generateChartData($dateStart, $dateEnd) {
     
             $expensePieChart = "SELECT ec.name category, SUM(e.amount) total FROM expenses AS e, expenses_category_assigned_to_users AS ec 
             WHERE e.user_id=".$_SESSION['user_id']." AND ec.user_id=".$_SESSION['user_id']." AND ec.id=e.expense_category AND e.date 
