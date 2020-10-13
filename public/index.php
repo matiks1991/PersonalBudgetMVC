@@ -29,6 +29,11 @@
 	$router->add('signup/activate/{token:[\da-f]+}', ['controller' => 'Signup', 'action' => 'activate']);
 	$router->add('expense', ['controller' => 'Expense', 'action' => 'index']);
 	$router->add('income', ['controller' => 'Income', 'action' => 'index']);
+	$router->add('balance', ['controller' => 'Balance', 'action' => 'index']);
+	$router->add('poprzedni-miesiac', ['controller' => 'Balance', 'action' => 'previousMonth']);
+	$router->add('biezacy-rok', ['controller' => 'Balance', 'action' => 'currentYear']);
+	$router->add('niestandardowy-okres', ['controller' => 'Balance', 'action' => 'customPeriod']);
+	$router->add('settings', ['controller' => 'Settings', 'action' => 'index']);
 
 	$router->add('{controller}/{action}');
 

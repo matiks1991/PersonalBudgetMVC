@@ -63,8 +63,8 @@ use PDO;
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
-
-            $stmt->bindValue(':amount', $_POST['amount'], PDO::PARAM_INT);
+            
+            $stmt->bindValue(':amount', $_POST['amount'], PDO::PARAM_STR);
             $stmt->bindValue(':date', $_POST['date'], PDO::PARAM_STR);
             $stmt->bindValue(':paymentMethod', $_POST['paymentMethod'], PDO::PARAM_INT);
             $stmt->bindValue(':category', $_POST['expenseCategory'], PDO::PARAM_INT);
