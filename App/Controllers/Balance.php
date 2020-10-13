@@ -25,6 +25,8 @@ class Balance extends Authenticated
     {
         $arguments = Balances::getCurrentMonth();
         View::renderTemplate('Balance/index.html', $arguments);
+        // var_dump($arguments['jsonPieChart'][0]['category']);
+
     }
 
     /**
@@ -62,6 +64,7 @@ class Balance extends Authenticated
             $dateEnd = $_POST['dateEnd'];
             $arguments = Balances::getCustomPeriod($dateStart, $dateEnd);
         }
+
         View::renderTemplate('Balance/index.html', $arguments);
     }
 

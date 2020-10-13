@@ -222,7 +222,7 @@ use PDO;
                 array_push($expensePie, array("label"=>$expenseChart['category'], "y"=>$expenseChart['total']));
             }
     
-            return json_encode($expensePie, JSON_NUMERIC_CHECK);
+            json_encode($expensePie, JSON_NUMERIC_CHECK);
             
             return $expensesArray;
     }
