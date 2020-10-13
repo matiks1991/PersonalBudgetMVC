@@ -4,7 +4,7 @@
 
 {% block header %}
 
-<!-- <header>
+<header>
     <nav class="navbar sticky navbar-expand-xl navbar-dark bg-dark fixed-top py-0 text-center text-sm-left">
 
         <button class="navbar-toggler my-2" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -60,7 +60,7 @@
 
     </nav>
 
-</header> -->
+</header>
 
   {% endblock %}
   {% block body %}
@@ -345,19 +345,10 @@
 
     function drawChart(){
 
-        // console.log('{{ jsonPieChart }}');
-        
-        // var data = new google.visualization.arrayToDataTable([
-        //     [{label: 'Category', type: 'string'}, {label: 'Value', type: 'number'}],
-        //     {% for record in jsonPieChart %}
-        //         ['{{ record.category }}', {{ record['total'] }}]
-        //     {% endfor %}
-        // ]);
-
         var data = google.visualization.arrayToDataTable([
         	['Name', 'Value'],
-            {% for pieCh in jsonPieChart %}
-          		['{{ pieCh.category }}', {{ pieCh.total }}],
+            {% for record in jsonPieChart %}
+          		['{{ record.category }}', {{ record.total }}],
           	{% endfor %}
         ]);
 
